@@ -17,7 +17,7 @@
   position: fixed;
   right: 20px;
   bottom: 24px;
-  z-index: 9999;
+  z-index: 19;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,6 +28,22 @@
   border-radius: 999px;
   box-shadow: 0 4px 12px #00000026;
   transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.burger {
+  cursor: pointer;
+}
+
+.burger--open .burger__bun:first-child {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burger--open .burger__meat {
+  opacity: 0;
+}
+
+.burger--open .burger__bun:last-child {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .static-whatsapp-bubble:hover {
