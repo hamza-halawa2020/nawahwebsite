@@ -40,6 +40,13 @@ export class SiteInteractionsDirective implements AfterViewInit, OnDestroy {
       return;
     }
 
+    const link = target.closest<HTMLAnchorElement>('a[href]');
+
+    if (link && this.navigateInternally(event, link)) {
+      this.closeAllMobileMenus();
+      return;
+    }
+
     if (target.closest('.block-header-layout-mobile__dropdown a')) {
       this.closeAllMobileMenus();
     }
@@ -59,6 +66,51 @@ export class SiteInteractionsDirective implements AfterViewInit, OnDestroy {
     this.closeAllMobileMenus();
     this.activateTransitions();
     this.syncHeaderShadow();
+  }
+
+  private navigateInternally(event: MouseEvent, link: HTMLAnchorElement): boolean {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      link.target === '_blank' ||
+      link.hasAttribute('download')
+    ) {
+      return false;
+    }
+
+    const href = link.getAttribute('href');
+
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+      return false;
+    }
+
+    const url = new URL(href, window.location.origin);
+
+    if (url.origin !== window.location.origin) {
+      return false;
+    }
+
+    const nextUrl = `${url.pathname}${url.search}${url.hash}`;
+    const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+    event.preventDefault();
+
+    if (nextUrl === currentUrl) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return true;
+    }
+
+    void this.router.navigateByUrl(nextUrl).then((navigated) => {
+      if (navigated && !url.hash) {
+        window.scrollTo({ top: 0 });
+      }
+    });
+
+    return true;
   }
 
   private toggleMobileMenu(burger: HTMLButtonElement): void {
