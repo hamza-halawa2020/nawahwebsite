@@ -1,0 +1,14 @@
+/* Static export fallback: show server-rendered content even if animation hydration does not run. */
+.transition--root-hidden [data-animation-role],
+.transition--root-hidden [data-animation-role="block-element"],
+.transition--root-hidden [data-animation-role="image"],
+.transition--root-hidden,
+.transition {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.transition--slide,
+.transition--fade {
+  transform: none !important;
+}

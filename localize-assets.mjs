@@ -7,7 +7,10 @@ const assetRoot = join(root, 'local-assets');
 const allowedHosts = new Set([
   'assets.zyrosite.com',
   'cdn.zyrosite.com',
+  'i.ytimg.com',
   'images.unsplash.com',
+  'images.pexels.com',
+  'videos.pexels.com',
 ]);
 const textExtensions = new Set(['.html', '.css', '.js']);
 const skippedDirs = new Set(['.git', '_before-shared-layout-20260629-002916']);
@@ -43,6 +46,7 @@ function safeExtension(url, contentType = '') {
   if (contentType.includes('png')) return '.png';
   if (contentType.includes('jpeg')) return '.jpg';
   if (contentType.includes('webp')) return '.webp';
+  if (contentType.includes('mp4')) return '.mp4';
   return '.bin';
 }
 
@@ -56,16 +60,20 @@ function localPathFor(url, contentType) {
 
 function findUrls(text) {
   const urls = new Set();
-  for (const match of text.matchAll(/https?:\/\/[^\s"'<>\\)]+/g)) {
+  for (const match of text.matchAll(/https?:\/\/(?:(?!&quot;|&#39;)[^\s"'<>\\)])+/g)) {
     const cleaned = match[0]
       .replaceAll('&amp;', '&')
+      .replaceAll('&quot;', '')
+      .replaceAll('&#39;', '')
       .replace(/[`,;}\]]+$/g, '');
     try {
       const parsed = new URL(cleaned);
       if (
         allowedHosts.has(parsed.hostname) &&
         parsed.pathname !== '/' &&
-        !cleaned.includes('${')
+        !cleaned.includes('${') &&
+        !cleaned.includes('%60') &&
+        !cleaned.includes('`')
       ) {
         urls.add(parsed.toString());
       }
@@ -85,7 +93,8 @@ async function download(url, known = new Map()) {
     },
   });
   if (!response.ok) {
-    throw new Error(`Failed ${response.status} ${url}`);
+    console.warn(`Skipped ${response.status} ${url}`);
+    return url;
   }
 
   const contentType = response.headers.get('content-type') || '';

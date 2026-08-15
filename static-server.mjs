@@ -16,7 +16,7 @@ const mimeTypes = {
   '.webp': 'image/webp',
 };
 
-createServer((request, response) => {
+const server = createServer((request, response) => {
   const urlPath = decodeURIComponent((request.url || '/').split('?')[0]);
   let filePath = resolve(join(root, urlPath));
 
@@ -40,6 +40,18 @@ createServer((request, response) => {
     'Content-Type': mimeTypes[extname(filePath)] || 'application/octet-stream',
   });
   createReadStream(filePath).pipe(response);
-}).listen(port, '127.0.0.1', () => {
+});
+
+server.on('error', (error) => {
+  if (error.code === 'EADDRINUSE') {
+    console.error(`Port ${port} is already in use. Open http://127.0.0.1:${port}/ or run with another port:`);
+    console.error('PowerShell: $env:PORT=4174; node static-server.mjs');
+    process.exit(1);
+  }
+
+  throw error;
+});
+
+server.listen(port, '127.0.0.1', () => {
   console.log(`Static site running at http://127.0.0.1:${port}`);
 });

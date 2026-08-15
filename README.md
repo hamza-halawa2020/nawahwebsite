@@ -1,5 +1,7 @@
 # Nawah Website Static Export
 
+External images, fonts, and media used by the pages are saved locally in `local-assets`.
+
 Run locally:
 
 ```powershell
