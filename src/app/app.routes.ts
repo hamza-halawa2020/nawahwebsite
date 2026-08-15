@@ -9,13 +9,10 @@ import { SolutionsPageComponent } from './pages/solutions-page/solutions-page.co
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent, title: 'Nawah Energies' },
-  { path: 'about-us', component: AboutPageComponent, title: 'About Us | Nawah Energies' },
   { path: 'nawah-energiesabout-us-', component: AboutPageComponent, title: 'About Us | Nawah Energies' },
   { path: 'solutions', component: SolutionsPageComponent, title: 'Solutions | Nawah Energies' },
-  { path: 'impact', component: ImpactPageComponent, title: 'Impact | Nawah Energies' },
   { path: 'impact-carbon-savings', component: ImpactPageComponent, title: 'Impact | Nawah Energies' },
   { path: 'investment', component: InvestmentPageComponent, title: 'Investment | Nawah Energies' },
-  { path: 'contact-us', component: ContactPageComponent, title: 'Contact | Nawah Energies' },
   {
     path: 'contact-nawahs-team-island-energy-project',
     component: ContactPageComponent,
