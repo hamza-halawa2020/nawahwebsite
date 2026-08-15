@@ -1,0 +1,51 @@
+/* Static export fallback: show server-rendered content even if animation hydration does not run. */
+.transition--root-hidden [data-animation-role],
+.transition--root-hidden [data-animation-role="block-element"],
+.transition--root-hidden [data-animation-role="image"],
+.transition--root-hidden,
+.transition {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.transition--slide,
+.transition--fade {
+  transform: none !important;
+}
+
+.static-whatsapp-bubble {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  color: #fff;
+  background: #25d366;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px #00000026;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.static-whatsapp-bubble:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+}
+
+.static-whatsapp-bubble svg {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+@media screen and (max-width: 640px) {
+  .static-whatsapp-bubble {
+    right: 16px;
+    bottom: 18px;
+    width: 52px;
+    height: 52px;
+  }
+}
