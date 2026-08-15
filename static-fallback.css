@@ -13,6 +13,30 @@
   transform: none !important;
 }
 
+.text-box h1[style*="fontsizedesktop" i],
+.text-box h2[style*="fontsizedesktop" i],
+.text-box h3[style*="fontsizedesktop" i],
+.text-box h4[style*="fontsizedesktop" i],
+.text-box h5[style*="fontsizedesktop" i],
+.text-box h6[style*="fontsizedesktop" i],
+.text-box p[style*="fontsizedesktop" i] {
+  font-size: var(--fontSizeDesktop, var(--fontsizedesktop)) !important;
+  line-height: var(--lineHeightDesktop, var(--lineheightdesktop, 1.3)) !important;
+}
+
+@media screen and (max-width: 920px) {
+  .text-box h1[style*="fontsizemobile" i],
+  .text-box h2[style*="fontsizemobile" i],
+  .text-box h3[style*="fontsizemobile" i],
+  .text-box h4[style*="fontsizemobile" i],
+  .text-box h5[style*="fontsizemobile" i],
+  .text-box h6[style*="fontsizemobile" i],
+  .text-box p[style*="fontsizemobile" i] {
+    font-size: var(--fontSizeMobile, var(--fontsizemobile)) !important;
+    line-height: var(--lineHeightMobile, var(--lineheightmobile, var(--lineHeightDesktop, var(--lineheightdesktop, 1.3)))) !important;
+  }
+}
+
 .static-whatsapp-bubble {
   position: fixed;
   right: 20px;
