@@ -24,9 +24,9 @@
             ],
             "styles": [
               "public/local-assets/cdn.zyrosite.com/font-faces-0145dd571051.css",
-              "public/_astro-1784102099836/_..0kNO_p2j.css",
-              "public/_astro-1784102099836/cookieconsent.DjanN7tQ.css",
-              "public/static-fallback.css",
+              "src/styles/original-site.css",
+              "src/styles/cookieconsent.css",
+              "src/styles/static-fallback.css",
               "src/styles.css"
             ],
             "scripts": []
