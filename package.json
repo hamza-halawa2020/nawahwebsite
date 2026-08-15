@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 127.0.0.1 --port 4200",
+    "start": "ng serve --host 127.0.0.1 --port 4300",
     "build": "ng build",
     "extract:pages": "node tools/extract-static-pages.mjs"
   },
