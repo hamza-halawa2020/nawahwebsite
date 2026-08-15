@@ -5,9 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 127.0.0.1 --port 4300",
-    "build": "ng build",
-    "extract:pages": "node tools/extract-static-pages.mjs",
-    "sync:templates": "node tools/sync-angular-templates.mjs"
+    "build": "ng build"
   },
   "dependencies": {
     "@angular/animations": "^21.0.0",
