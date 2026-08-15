@@ -45,7 +45,7 @@ function fixOnce(text) {
 }
 
 function score(text) {
-  return (text.match(/[ÃÂâ€™€œ€šƒÅ]/g) || []).length;
+  return (text.match(/[ÃÂâ€™€œ€šƒÅØÙ]/g) || []).length;
 }
 
 for (const file of files) {
